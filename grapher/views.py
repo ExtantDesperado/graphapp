@@ -6,4 +6,4 @@ from django.template import loader
 def grapher(request):
     #template = loader.get_template('grapher/grapher.html')
     #return HttpResponse(template.render(request))
-    return render(request, 'grapher/graph_page.html')
+    return render(request, 'grapher/graph_page.html', {})
