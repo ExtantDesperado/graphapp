@@ -1,3 +1,13 @@
-<link type="text/javascript" href="grapher/graph2d.js"/>
+{% load staticfiles %}
 
-<canvas id="canvas"></canvas>
+<!DOCTYPE html5>
+
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <canvas id="canvas" width="200" height="200" style="border: 1px solid black;"></canvas>
+        <script type="text/javascript" src="{% static 'grapher/graph2d.js' %}"></script>
+    </body>
+</html>
