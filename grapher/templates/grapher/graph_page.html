@@ -8,6 +8,17 @@
     </head>
     <body>
         <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+        
+        <form>
+            <label for="dropdown">Function: </label>
+            <select id="dropdown">
+                {% for f in function_list %}
+                <option value="{{ f.name }}" {% if f == function %} selected {% endif %}>{{ f.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Graph it!">
+        </form>
+        
         <!--<script type="text/javascript" src="{% static 'grapher/graph2d.js' %}"></script>-->
         <script>
             var canvas = document.getElementById("canvas");

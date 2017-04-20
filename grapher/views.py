@@ -6,5 +6,5 @@ from .models import Function
 
 # Create your views here.
 def grapher(request):
-    function = get_object_or_404(Function, pk=7)
-    return render(request, 'grapher/graph_page.html', {'function': function})
+    function = get_object_or_404(Function, pk=2)
+    return render(request, 'grapher/graph_page.html', {'function': function, 'function_list': Function.objects.all()})
