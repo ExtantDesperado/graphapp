@@ -1,0 +1,15 @@
+<!DOCTYPE html5>
+
+<html>
+    <head>
+        
+    </head>
+    <body>
+        Available functions:
+        <ul>
+        {% for f in function_list %}
+            <li><a href="{% url 'grapher' f.pk %}">{{ f.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
