@@ -12,7 +12,7 @@
             <li><a>Dictionary</a></li>
             <li>
                 <div id="dropdown">
-                    <span>Dropdown</span>
+                    <span>Graphs</span>
                     <div id="dropdown-content">
                         {% for f in function_list %}
                         <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
@@ -21,15 +21,17 @@
                 </div>
             </li>
             <li><a href="{% url 'input' %}">New Graph</a></li>
+            <li><a href="{% url 'operations' %}">Operations</a></li>
         </ul>
         
         <div id="inputform">
             <form action="{% url 'create' %}" method="post">{% csrf_token %}
                 <h3>Create a New Graph</h3>
+                {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
                 <label for="name">Name: </label>
-                <input type="text" id="name" name="name"/>
+                <input type="text" id="name" name="name" {% if prev_name %}value="{{ prev_name }}"{% endif %}/>
                 <label for="javascript">JavaScript: </label>
-                <input type="text" id="javascript" name="javascript"/>
+                <input type="text" id="javascript" name="javascript" {% if prev_script %}value="{{ prev_script }}"{% endif %}/>
                 <input type="submit" value="Create"/>
             </form>
         </div>

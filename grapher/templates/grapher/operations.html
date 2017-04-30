@@ -1,0 +1,99 @@
+{% load staticfiles %}
+
+<!DOCTYPE html5>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'grapher/style.css' %}"/>
+    </head>
+    <body>
+        <ul id="menubar">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a>Dictionary</a></li>
+            <li>
+                <div id="dropdown">
+                    <span>Graphs</span>
+                    <div id="dropdown-content">
+                        {% for f in function_list %}
+                        <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            <li><a href="{% url 'input' %}">New Graph</a></li>
+            <li><a href="{% url 'operations' %}">Operations</a></li>
+        </ul>
+        
+        <h4 style="text-align: center;">Some basic JavaScript math operations</h4>
+        <table>
+            <tr>
+                <th>JavaScript</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Math.E</td>
+                <td>Euler's constant, approximately 2.718.</td>
+            </tr>
+            <tr>
+                <td>Math.PI</td>
+                <td>Ratio of circumference of a circle to its diameter, approximately 3.14.</td>
+            </tr>
+            <tr>
+                <td>Math.abs(x)</td>
+                <td>Returns the absolute value of x.</td>
+            </tr>
+            <tr>
+                <td>Math.ceil(x)</td>
+                <td>Returns the smallest integer greater than or equal to x.</td>
+            </tr>
+            <tr>
+                <td>Math.cos(x)</td>
+                <td>Returns the cosine of x.</td>
+            </tr>
+            <tr>
+                <td>Math.exp(x)</td>
+                <td>Returns E^x, where E is Euler's constant.</td>
+            </tr>
+            <tr>
+                <td>Math.floor(x)</td>
+                <td>Returns the largest integer less than or equal to x.</td>
+            </tr>
+            <tr>
+                <td>Math.log(x)</td>
+                <td>Returns the natural logarithm of x.</td>
+            </tr>
+            <tr>
+                <td>Math.log10(x)</td>
+                <td>Returns the base 10 logarithm of x.</td>
+            </tr>
+            <tr>
+                <td>Math.max(x1,x2,...)</td>
+                <td>Returns the largest of its arguments.</td>
+            </tr>
+            <tr>
+                <td>Math.min(x1,x2,...)</td>
+                <td>Returns the smallest of its arguments.</td>
+            </tr>
+            <tr>
+                <td>Math.pow(x,y)</td>
+                <td>Returns x to the power of y.</td>
+            </tr>
+            <tr>
+                <td>Math.random()</td>
+                <td>Returns a pseudo-random number between 0 and 1.</td>
+            </tr>
+            <tr>
+                <td>Math.sin(x)</td>
+                <td>Returns the sine of x.</td>
+            </tr>
+            <tr>
+                <td>Math.sqrt(x)</td>
+                <td>Returns the positive square root of x.</td>
+            </tr>
+            <tr>
+                <td>Math.tan(x)</td>
+                <td>Returns the tangent of x.</td>
+            </tr>
+        </table>
+    </body>
+</html>

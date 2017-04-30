@@ -25,6 +25,18 @@ def input(request):
     return render(request, 'grapher/input.html', {'function_list': Function.objects.all()})
     
 def create(request):
-    newFunction = Function(name=request.POST['name'], script=request.POST['javascript'])
-    newFunction.save()
-    return HttpResponseRedirect(reverse('grapher', args=(newFunction.pk,)))
+    if not request.POST['name']:
+        return render(request, 'grapher/input.html', {'function_list': Function.objects.all(), 'error_message': "Enter a function name.", 'prev_script': request.POST['javascript']})
+    if not request.POST['javascript']:
+        return render(request, 'grapher/input.html', {'function_list': Function.objects.all(), 'error_message': "Enter function JavaScript.", 'prev_name': request.POST['name']})
+    try:
+        Function.objects.filter(name=request.POST['name'])
+    except Function.DoesNotExist:
+        newFunction = Function(name=request.POST['name'], script=request.POST['javascript'])
+        newFunction.save()
+        return HttpResponseRedirect(reverse('grapher', args=(newFunction.pk,)))
+    else:
+        return render(request, 'grapher/input.html', {'function_list': Function.objects.all(), 'error_message': "Function with that name already exists.", 'prev_script': request.POST['javascript']})
+
+def operations(request):
+    return render(request, 'grapher/operations.html', {'function_list': Function.objects.all()})

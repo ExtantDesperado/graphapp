@@ -12,7 +12,7 @@
             <li><a>Dictionary</a></li>
             <li>
                 <div id="dropdown">
-                    <span>Dropdown</span>
+                    <span>Graphs</span>
                     <div id="dropdown-content">
                         {% for f in function_list %}
                         <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
@@ -21,6 +21,7 @@
                 </div>
             </li>
             <li><a href="{% url 'input' %}">New Graph</a></li>
+            <li><a href="{% url 'operations' %}">Operations</a></li>
         </ul>
         
         <h1>f(x) = {{ function.name }}</h1>
