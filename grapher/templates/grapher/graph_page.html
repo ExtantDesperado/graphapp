@@ -7,15 +7,23 @@
         <link rel="stylesheet" type="text/css" href="{% static 'grapher/style.css' %}"/>
     </head>
     <body>
+        <ul id="menubar">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a>Dictionary</a></li>
+            <li>
+                <div id="dropdown">
+                    <span>Dropdown</span>
+                    <div id="dropdown-content">
+                        {% for f in function_list %}
+                        <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            <li><a href="{% url 'input' %}">New Graph</a></li>
+        </ul>
+        
         <h1>f(x) = {{ function.name }}</h1>
-        <div id="dropdown">
-            <span>Dropdown</span>
-            <div id="dropdown-content">
-                {% for f in function_list %}
-                <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
-                {% endfor %}
-            </div>
-        </div>
         
         <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
         

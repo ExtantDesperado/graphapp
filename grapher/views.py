@@ -21,3 +21,10 @@ def grapher(request, function_id):
     function = get_object_or_404(Function, pk=function_id)
     return render(request, 'grapher/graph_page.html', {'function': function, 'function_list': Function.objects.all()})
 
+def input(request):
+    return render(request, 'grapher/input.html', {'function_list': Function.objects.all()})
+    
+def create(request):
+    newFunction = Function(name=request.POST['name'], script=request.POST['javascript'])
+    newFunction.save()
+    return HttpResponseRedirect(reverse('grapher', args=(newFunction.pk,)))

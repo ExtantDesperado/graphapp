@@ -23,11 +23,15 @@
             <li><a href="{% url 'input' %}">New Graph</a></li>
         </ul>
         
-        Available functions:
-        <ul>
-        {% for f in function_list %}
-            <li><a href="{% url 'grapher' f.pk %}">{{ f.name }}</a></li>
-        {% endfor %}
-        </ul>
+        <div id="inputform">
+            <form action="{% url 'create' %}" method="post">{% csrf_token %}
+                <h3>Create a New Graph</h3>
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name"/>
+                <label for="javascript">JavaScript: </label>
+                <input type="text" id="javascript" name="javascript"/>
+                <input type="submit" value="Create"/>
+            </form>
+        </div>
     </body>
 </html>
