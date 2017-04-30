@@ -4,20 +4,20 @@
 
 <html>
     <head>
-        
+        <link rel="stylesheet" type="text/css" href="{% static 'grapher/style.css' %}"/>
     </head>
     <body>
-        <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
-        
-        <form>
-            <label for="dropdown">Function: </label>
-            <select id="dropdown">
+        <h1>f(x) = {{ function.name }}</h1>
+        <div id="dropdown">
+            <span>Dropdown</span>
+            <div id="dropdown-content">
                 {% for f in function_list %}
-                <option value="{{ f.name }}" {% if f == function %} selected {% endif %}>{{ f.name }}</option>
+                <a href="{% url 'grapher' f.pk %}">{{ f.name }}</a>
                 {% endfor %}
-            </select>
-            <input type="submit" value="Graph it!">
-        </form>
+            </div>
+        </div>
+        
+        <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
         
         <!--<script type="text/javascript" src="{% static 'grapher/graph2d.js' %}"></script>-->
         <script>
@@ -70,5 +70,6 @@
             drawAxes();
             drawGraph(points);
         </script>
+        <a href="{% url 'index' %}">Home</a>
     </body>
 </html>
