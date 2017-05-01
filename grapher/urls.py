@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^input/$', views.input, name="input"),
     url(r'^create/$', views.create, name="create"),
     url(r'^operations/$', views.operations, name="operations"),
+    url(r'^dictionary/$', views.dictionary, name="dictionary"),
 ]

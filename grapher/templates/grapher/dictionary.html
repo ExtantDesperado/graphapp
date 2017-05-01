@@ -24,11 +24,18 @@
             <li><a href="{% url 'operations' %}">Operations</a></li>
         </ul>
         
-        Available functions:
-        <ul>
-        {% for f in function_list %}
-            <li><a href="{% url 'grapher' f.pk %}">{{ f.name }}</a></li>
-        {% endfor %}
-        </ul>
+        <h4 style="text-align: center;">All functions currently in the database</h4>
+        <table>
+            <tr>
+                <th>Function Name</th>
+                <th>JavaScript</th>
+            </tr>
+            {% for f in function_list %}
+            <tr>
+                <td>{{ f.name }}</td>
+                <td>{{ f.script }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>

@@ -30,7 +30,7 @@ def create(request):
     if not request.POST['javascript']:
         return render(request, 'grapher/input.html', {'function_list': Function.objects.all(), 'error_message': "Enter function JavaScript.", 'prev_name': request.POST['name']})
     try:
-        Function.objects.filter(name=request.POST['name'])
+        Function.objects.get(name=request.POST['name'])
     except Function.DoesNotExist:
         newFunction = Function(name=request.POST['name'], script=request.POST['javascript'])
         newFunction.save()
@@ -40,3 +40,6 @@ def create(request):
 
 def operations(request):
     return render(request, 'grapher/operations.html', {'function_list': Function.objects.all()})
+
+def dictionary(request):
+    return render(request, 'grapher/dictionary.html', {'function_list': Function.objects.all()})
