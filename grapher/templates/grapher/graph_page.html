@@ -26,6 +26,8 @@
         
         <h1>f(x) = {{ function.name }}</h1>
         
+        <div id="dlDiv"><a id="dlLink">Click to download graph as PNG</a></div>
+        
         <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
         
         <form action="{% url 'grapher' function.pk %}" id="graphform" method="get">
@@ -73,6 +75,11 @@
             }
             
             function drawAxes() {
+                context.beginPath();
+                context.rect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = "white";
+                context.fill();
+                
                 context.strokeStyle = "#999999";
                 context.lineWidth = 3;
                 context.beginPath();
@@ -104,6 +111,11 @@
             
             drawAxes();
             drawGraph();
+            
+            var dlLink = document.getElementById("dlLink");
+            dlLink.href = canvas.toDataURL("image/png");
+            dlLink.download = "graph_img";
+            dlLink.dataset.downloadurl = ["image/png", dlLink.download, dlLink.href].join(':');
         </script>
     </body>
 </html>
