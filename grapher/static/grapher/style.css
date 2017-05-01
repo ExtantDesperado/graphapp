@@ -96,3 +96,18 @@ td, th {
     border: 1px solid black;
     padding: 5px;
 }
+
+#graphform {
+    display: block;
+    text-align: center;
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    position: relative;
+}
+
+#graphform input[type="text"] {
+    width: 50px;
+}

@@ -7,19 +7,19 @@ from .models import Function
 
 # Create your views here.
 def index(request):
-    #if request.method == 'POST':
-        #function = get_object_or_404(Function, name=request.POST['text'])
-        #return HttpResponse(function.pk)
-        #try:
-        #    return HttpResponseRedirect(reverse('grapher', args=(request.POST['dropdown'],)))
-        #except (KeyError):
-        #    return HttpResponse()
-    #else:
     return render(request, 'grapher/index.html', {'function_list': Function.objects.all()})
 
 def grapher(request, function_id):
     function = get_object_or_404(Function, pk=function_id)
-    return render(request, 'grapher/graph_page.html', {'function': function, 'function_list': Function.objects.all()})
+    try:
+        x1 = request.GET['x1']
+        x2 = request.GET['x2']
+        y1 = request.GET['y1']
+        y2 = request.GET['y2']
+    except (KeyError):
+        return render(request, 'grapher/graph_page.html', {'function': function, 'function_list': Function.objects.all()})
+    else:
+        return render(request, 'grapher/graph_page.html', {'function': function, 'function_list': Function.objects.all(), 'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2})
 
 def input(request):
     return render(request, 'grapher/input.html', {'function_list': Function.objects.all()})

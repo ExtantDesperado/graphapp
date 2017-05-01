@@ -32,7 +32,7 @@
             </tr>
             {% for f in function_list %}
             <tr>
-                <td>{{ f.name }}</td>
+                <td><a href="{% url 'grapher' f.pk %}">{{ f.name }}</a></td>
                 <td>{{ f.script }}</td>
             </tr>
             {% endfor %}

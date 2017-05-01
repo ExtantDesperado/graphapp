@@ -28,19 +28,46 @@
         
         <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
         
+        <form action="{% url 'grapher' function.pk %}" id="graphform" method="get">
+            <div>
+                <label for="x1">Domain: from </label>
+                <input type="text" name="x1" value="{% if x1 %}{{ x1 }}{% else %}-5{% endif %}"/>
+                <label for="x2"> to </label>
+                <input type="text" name="x2" value="{% if x2 %}{{ x2 }}{% else %}5{% endif %}"/>
+            </div>
+            <div>
+                <label for="y1">Range: from </label>
+                <input type="text" name="y1" value="{% if y1 %}{{ y1 }}{% else %}-5{% endif %}"/>
+                <label for="y2"> to </label>
+                <input type="text" name="y2" value="{% if y2 %}{{ y2 }}{% else %}5{% endif %}"/>
+            </div>
+            <input type="submit" name="Graph"/>
+        </form>
+        
         <!--<script type="text/javascript" src="{% static 'grapher/graph2d.js' %}"></script>-->
         <script>
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
+            var res = 1000;
+            var x1 = -5;
+            var x2 = 5;
+            var y1 = -5;
+            var y2 = 5;
             
-            function drawGraph(points) {
+            {% if x1 %}x1 = {{ x1 }}{% endif %}
+            {% if x2 %}x2 = {{ x2 }}{% endif %}
+            {% if y1 %}y1 = {{ y1 }}{% endif %}
+            {% if y2 %}y2 = {{ y2 }}{% endif %}
+            
+            function drawGraph() {
                 context.lineWidth = 1;
                 context.strokeStyle = "black";
-                var c = canvas.width/10;
                 context.beginPath();
-                context.moveTo(0,canvas.height/2-points[0]*c);
-                for (var i = 1; i < points.length; i++) {
-                    context.lineTo(i*c/100,canvas.height/2-points[i]*c);
+                var x = x1;
+                context.moveTo(0, canvas.height*({{ function.script }}-y2)/(y1-y2));
+                var increment = (x2-x1)/res;
+                for (var x = x1+increment; x <= x2; x += increment) {
+                    context.lineTo(canvas.width*(x-x1)/(x2-x1), canvas.height*({{ function.script }}-y2)/(y1-y2));
                 }
                 context.stroke();
             }
@@ -49,36 +76,34 @@
                 context.strokeStyle = "#999999";
                 context.lineWidth = 3;
                 context.beginPath();
-                context.moveTo(canvas.width/2,0);
-                context.lineTo(canvas.width/2,canvas.height);
+                context.moveTo(-canvas.width*x1/(x2-x1), 0);
+                context.lineTo(-canvas.width*x1/(x2-x1), canvas.height);
                 context.stroke();
                 
                 context.beginPath();
-                context.moveTo(0,canvas.height/2);
-                context.lineTo(canvas.width,canvas.height/2);
+                context.moveTo(0, -canvas.height*y2/(y1-y2));
+                context.lineTo(canvas.width, -canvas.height*y2/(y1-y2));
                 context.stroke();
                 
                 context.lineWidth = 1;
-                for (var i = canvas.width/10; i < canvas.width; i += canvas.width/10) {
+                for (var x = Math.ceil(x1); x <= Math.floor(x2); x++) {
+                    console.log("x: " + x);
                     context.beginPath();
-                    context.moveTo(i,0);
-                    context.lineTo(i,canvas.height);
+                    context.moveTo(canvas.width*(x-x1)/(x2-x1), 0);
+                    context.lineTo(canvas.width*(x-x1)/(x2-x1), canvas.height);
                     context.stroke();
+                }
+                for (var y = Math.ceil(y1); y <= Math.floor(y2); y++) {
+                    console.log("y: " + y);
                     context.beginPath();
-                    context.moveTo(0,i);
-                    context.lineTo(canvas.width,i);
+                    context.moveTo(0, canvas.height*(y-y2)/(y1-y2));
+                    context.lineTo(canvas.width, canvas.height*(y-y2)/(y1-y2));
                     context.stroke();
                 }
             }
             
-            var points = [];
-            for (var i = 0; i < 1001; i++) {
-                var x = (i - 500)/100;
-                points[i] = {{ function.script }};
-            }
             drawAxes();
-            drawGraph(points);
+            drawGraph();
         </script>
-        <a href="{% url 'index' %}">Home</a>
     </body>
 </html>
