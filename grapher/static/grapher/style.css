@@ -10,6 +10,7 @@ h1 {
 body {
     margin: 0px;
     padding: 0px;
+    background-color: #e5efff;
 }
 
 #menubar {
@@ -80,7 +81,7 @@ body {
     width: 200px;
     margin: auto;
     padding: 20px;
-    background-color: #f3f3f3;
+    background-color: #48d9f9;
     border-radius: 10px;
     position: relative;
     top: 50%;
@@ -103,11 +104,17 @@ td, th {
     width: 500px;
     margin: auto;
     padding: 20px;
-    background-color: #f3f3f3;
+    background-color: #48d9f9;
     border-radius: 10px;
     position: relative;
 }
 
 #graphform input[type="text"] {
     width: 50px;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
 }

@@ -9,7 +9,6 @@
     <body>
         <ul id="menubar">
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'dictionary' %}">Dictionary</a></li>
             <li>
                 <div id="dropdown">
                     <span>Graphs</span>
@@ -21,14 +20,21 @@
                 </div>
             </li>
             <li><a href="{% url 'input' %}">New Graph</a></li>
+            <li><a href="{% url 'dictionary' %}">Dictionary</a></li>
             <li><a href="{% url 'operations' %}">Operations</a></li>
         </ul>
         
-        Available functions:
+        <h1>Welcome to this super-cool graphing application!</h1>
+        <p style="text-align: center;">Select a function from the graph dropdown list<br/>
+        to start graphing. Can't find the graph you need? Click New</br>
+        Graph to create your own! Click on the Dictionary to see the code<br/>
+        running behind each graph, or head over to the Operations tab if<br/>
+        you are unsure of how to enter your function.</p>
+        <!--Available functions:
         <ul>
         {% for f in function_list %}
             <li><a href="{% url 'grapher' f.pk %}">{{ f.name }}</a></li>
         {% endfor %}
-        </ul>
+        </ul>-->
     </body>
 </html>
